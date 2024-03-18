@@ -20,7 +20,7 @@ class MarketerMiddleware
     {
 
         if (is_null(Auth::user()->role)  && Auth::user()->role !== 'marketer') {
-            return $this->notPermitted(message: 'You are not a marketet. Sorry ');
+            return $this->notPermitted(message: 'You are not a marketer. Sorry ');
         }
         return $next($request);
     }

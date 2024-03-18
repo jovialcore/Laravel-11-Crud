@@ -5,7 +5,7 @@ namespace App\Http\Controllers;
 use App\Models\User;
 use App\Traits\ApiResponse;
 use Illuminate\Http\Request as HttpRequest;
-
+use Illuminate\Support\Facades\Validator;
 
 class AdminController extends Controller
 {
@@ -15,6 +15,14 @@ class AdminController extends Controller
      */
     public function assignMarketerRights(HttpRequest $request)
     {
+
+        $validator  = Validator::make($request->all(), [
+            'marketers' => ['required'],
+        ]);
+
+        if ($validator->fails()) {
+            return $this->error(data: $validator->errors()->toArray(), message: 'Input required fields');
+        }
         try {
 
             if (is_array($request->marketers)) {

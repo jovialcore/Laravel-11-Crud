@@ -21,7 +21,7 @@ class AdminMiddleware
 
         if (Auth::user()->role !== 'admin') {
 
-            return $this->serverError(message: 'You can\'t  do this because you are not an admin.');
+            return $this->notPermitted(message: 'You can\'t  do this because you are not an admin.');
         }
         return $next($request);
     }

@@ -55,13 +55,15 @@ class MarketingController extends Controller
     public function showMarketingChannel($marketingId)
     {
         try {
-            $marketingChannel =  Marketing::findOrFail($marketingId);
+            $marketingChannel =  Marketing::find($marketingId);
 
             if ($marketingChannel) {
 
                 $data = new marketResource($marketingChannel);
 
                 return $this->success(data: $data, message: 'Successful');
+            } else {
+                return $this->notFound(message: "We don't have any result for this marketing channel");
             }
         } catch (\Throwable $th) {
             return $this->serverError(message: $th->getMessage());
@@ -71,12 +73,14 @@ class MarketingController extends Controller
     // CRUD --Update
     public function updateMarketingChannel(MarketRequest $request, $marketChannelId): JsonResponse
     {
+       
         try {
-            $marketingChannel = new Marketing();
+            $marketingChannel = Marketing::Find($marketChannelId);
             $updated = $marketingChannel->update($request->only('name', 'description'));
             if ($updated) {
                 return $this->success(message: 'Channel Has been updated successfully');
             }
+            return $this->error(message: 'update failed');
         } catch (\Throwable $th) {
             return $this->serverError(message: $th->getMessage());
         }

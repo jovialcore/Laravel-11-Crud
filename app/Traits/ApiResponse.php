@@ -29,7 +29,7 @@ trait ApiResponse
 
     protected function notPermitted(array|object $data = [], string $message = '', int $code = 500): JsonResponse
     {
-        return $this->res('not_Permitted', $message, $data, $code);
+        return $this->res('not_permitted', $message, $data, $code);
     }
     
     protected function res(string $type, string $message, array|object $data, int $code): JsonResponse

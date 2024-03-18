@@ -5,6 +5,7 @@ Users can see listed marketing channels but they cannot create, delete or update
 
 Clone the project and install packages using composer install 
 
+create a `.env` and copy the `.env.example` to it while adjusting the database settings
 
 Run `php artisan migrate` to create database
 
@@ -12,5 +13,6 @@ Run `php artisan migrate` to create database
 There is a seeder for this
 run `php artisan db:seed`  . it creates about 10 users and one user with the adminstrator role 
 
-
 Run `php artisan serve`
+
+

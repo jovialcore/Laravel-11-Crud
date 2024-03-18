@@ -19,9 +19,9 @@ class AdminMiddleware
     public function handle(Request $request, Closure $next): Response
     {
 
-        if (Auth::user()->role !== 'admin'){
+        if (Auth::user()->role !== 'admin') {
 
-            $this->serverError(message : 'You can\'t  do this because you are not an admin.');
+            return $this->serverError(message: 'You can\'t  do this because you are not an admin.');
         }
         return $next($request);
     }

@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Middleware\AdminMiddleware;
 use App\Http\Middleware\MarketerMiddleware;
 use Illuminate\Foundation\Application;
 use Illuminate\Foundation\Configuration\Exceptions;
@@ -14,6 +15,7 @@ return Application::configure(basePath: dirname(__DIR__))
     )
     ->withMiddleware(function (Middleware $middleware) {
         $middleware->appendToGroup('marketers', [MarketerMiddleware::class]);
+        $middleware->appendToGroup('admins', [AdminMiddleware::class]);
         //
     })
     ->withExceptions(function (Exceptions $exceptions) {

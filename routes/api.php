@@ -10,9 +10,10 @@ Route::post('/register', [\App\Http\Controllers\Api\AuthController::class, 'regi
 
 Route::middleware(['auth:api'])->group(function () {
 
+    Route::get('/list', [App\Http\Controllers\MarketingController::class, 'listMarketingChannels']);
+
     Route::middleware(['marketers'])->group(function () {
-        
-        Route::get('/list', [App\Http\Controllers\MarketingController::class, 'listMarketingChannels']);
+
         Route::post('/create', [App\Http\Controllers\MarketingController::class, 'createMarketChannels']);
         Route::patch('/update', [App\Http\Controllers\MarketingController::class, 'updateMarketingChannel']);
         Route::delete('/delete', [App\Http\Controllers\MarketingController::class, 'deleteMarketingChannel']);
@@ -20,9 +21,8 @@ Route::middleware(['auth:api'])->group(function () {
 
 
     // admin routes
-    Route::prefix('admin')->group(function () {
+    Route::prefix('admin')->middleware(['admins'])->group(function () {
 
-        Route::get('/assign/role', [App\Http\Controllers\AdminController::class, 'assignMarketerRights'])
-            ->middleware(AdminMiddleware::class);
+        Route::post('/assign/role', [App\Http\Controllers\AdminController::class, 'assignMarketerRights']);
     });
 });

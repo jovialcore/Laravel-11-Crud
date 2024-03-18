@@ -2,6 +2,7 @@
 
 namespace App\Http\Middleware;
 
+use App\Traits\ApiResponse;
 use Closure;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
@@ -9,6 +10,7 @@ use Symfony\Component\HttpFoundation\Response;
 
 class MarketerMiddleware
 {
+    use ApiResponse;
     /**
      * Handle an incoming request.
      *
@@ -18,10 +20,7 @@ class MarketerMiddleware
     {
 
         if (is_null(Auth::user()->role)  && Auth::user()->role !== 'marketer') {
-            return response()->json([
-                'message' => 'You are not a marketer',
-
-            ], 403);
+            return $this->notPermitted(message: 'You are not a marketet. Sorry ');
         }
         return $next($request);
     }

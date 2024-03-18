@@ -15,4 +15,5 @@ run `php artisan db:seed`  . it creates about 10 users and one user with the adm
 
 Run `php artisan serve`
 
-
+#### Test
+For test, open another terminal and run `php artisan test`

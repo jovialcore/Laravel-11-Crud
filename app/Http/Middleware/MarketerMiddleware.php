@@ -18,10 +18,10 @@ class MarketerMiddleware
      */
     public function handle(Request $request, Closure $next): Response
     {
-
-        if (is_null(Auth::user()->role)  && Auth::user()->role !== 'marketer') {
-            return $this->notPermitted(message: 'You are not a marketer. Sorry ');
+        if (is_null(Auth::user()->role) || !in_array(Auth::user()->role, ['marketer', 'admin'])) {
+            return $this->notPermitted(message: 'You are not a marketer. Sorry');
         }
+
         return $next($request);
     }
 }

@@ -62,9 +62,8 @@ class MarketingController extends Controller
                 $data = new marketResource($marketingChannel);
 
                 return $this->success(data: $data, message: 'Successful');
-            } else {
-                return $this->notFound(message: "We don't have any result for this marketing channel");
             }
+            return $this->notFound(message: "We don't have any result for this marketing channel");
         } catch (\Throwable $th) {
             return $this->serverError(message: $th->getMessage());
         }
@@ -73,14 +72,15 @@ class MarketingController extends Controller
     // CRUD --Update
     public function updateMarketingChannel(MarketRequest $request, $marketChannelId): JsonResponse
     {
-       
+
         try {
             $marketingChannel = Marketing::Find($marketChannelId);
-            $updated = $marketingChannel->update($request->only('name', 'description'));
-            if ($updated) {
+            if ($marketingChannel) {
+                $marketingChannel->update($request->only('name', 'description'));
+
                 return $this->success(message: 'Channel Has been updated successfully');
             }
-            return $this->error(message: 'update failed');
+            return $this->error(message: 'Couldn\'t find  marketing channel ');
         } catch (\Throwable $th) {
             return $this->serverError(message: $th->getMessage());
         }
@@ -93,14 +93,15 @@ class MarketingController extends Controller
     {
         try {
 
-            $marketingChannel = Marketing::findOrFail($marketChannelId);
+            $marketingChannel = Marketing::find($marketChannelId);
 
-            if ($marketChannelId) {
+            if ($marketingChannel) {
 
                 $marketingChannel->delete();
 
                 return $this->success(message: 'Marketing channel Deleted successfully');
             }
+            return $this->error(message: 'Couldn\'t find  marketing channel ');
         } catch (\Throwable $th) {
             return $this->serverError(message: $th->getMessage());
         }

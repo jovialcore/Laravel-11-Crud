@@ -21,7 +21,7 @@ Route::middleware(['auth:api'])->group(function () {
 
         Route::put('/{marketChannelId}/update', [App\Http\Controllers\MarketingController::class, 'updateMarketingChannel']);
 
-        Route::delete('/delete', [App\Http\Controllers\MarketingController::class, 'deleteMarketingChannel']);
+        Route::delete('/{marketChannelId}/delete', [App\Http\Controllers\MarketingController::class, 'deleteMarketingChannel']);
     });
 
 

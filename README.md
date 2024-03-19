@@ -36,7 +36,7 @@ For test, open another terminal and run `php artisan test`
 
 ![Screenshot from 2024-03-18 14-29-50](https://github.com/jovialcore/Apex/assets/32295501/286dd214-623d-4b68-8bc3-cd570c176c5d)
 
-### creating market  market channels
+### creating market  channels
 ![Screenshot from 2024-03-18 14-29-59](https://github.com/jovialcore/Apex/assets/32295501/f34f691b-c783-4c94-b49c-ee92dbe6b388)
 
 
